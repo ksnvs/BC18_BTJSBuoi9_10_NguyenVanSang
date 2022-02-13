@@ -41,6 +41,10 @@ section {
   border: 1px solid #696969;
   text-align: center;
 }
+.table td {
+  border: 1px solid #696969;
+  text-align: center;
+}
 .heading-MNV {
   width: 200px;
 }
