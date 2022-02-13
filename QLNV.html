@@ -16,25 +16,197 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+    />
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <link rel="stylesheet" href="./css/QLNV.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script>
+      $(function () {
+        $("#txtNgaySinhNV").datepicker({
+          onSelect: function (dateText) {
+            document.getElementById("spanNSNV").innerText = "";
+          },
+        });
+        $("#txtNgaySinhNV").datepicker("option", "dateFormat", "dd/mm/yy");
+      });
+    </script>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-6 mx-auto">
-          <h3>Quản Lý Nhân Viên</h3>
-          <button type="button" onclick="themNV()" class="btn btn-success">
-            Thêm Nhân Viên
-          </button>
+    <section>
+      <div class="container">
+        <h3>Quản Lý Nhân Viên</h3>
+        <div class="content">
+          <div class="row top-content">
+            <h5 class="text-primary">Quản Lý Nhân Viên</h5>
+            <div class="btnAdd">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-toggle="modal"
+                data-target="#exampleModal"
+                data-whatever="@fat"
+                onclick="clearAllFields()"
+              >
+                Thêm nhân viên
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 mx-auto">
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Thêm nhân viên
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label for="txtMaNV" class="col-form-label"
+                          >Mã nhân viên:</label
+                        >
+                        <input type="text" class="form-control" id="txtMaNV" />
+                        <span id="spanMaNV" class="text-danger"></span>
+                      </div>
+                      <div class="form-group">
+                        <label for="txtTenNV" class="col-form-label"
+                          >Tên nhân viên:</label
+                        >
+                        <input type="text" class="form-control" id="txtTenNV" />
+                        <span id="spanTenNV" class="text-danger"></span>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="txtEmailNV" class="col-form-label"
+                          >Email:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txtEmailNV"
+                        />
+                        <span id="spanEmailNV" class="text-danger"></span>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="txtNgaySinhNV" class="col-form-label"
+                          >Ngày sinh:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="txtNgaySinhNV"
+                        />
+                        <span id="spanNSNV" class="text-danger"></span>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="txtChucVuNV" class="col-form-label"
+                          >Chức vụ:</label
+                        >
+
+                        <select
+                          class="custom-select"
+                          id="txtChucVuNV"
+                          onchange="SelectChangeVal()"
+                        >
+                          <option value="Nhân viên" selected>Nhân viên</option>
+                          <option value="Trưởng nhóm">Trưởng nhóm</option>
+                          <option value="Trưởng phòng">Trưởng phòng</option>
+                        </select>
+                        <span id="spanCVNV" class="text-danger"></span>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        onclick="themNV()"
+                        type="button"
+                        class="btn btn-primary"
+                      >
+                        Thêm Nhân Viên
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row bottom-content">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Tên nhân viên"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+              />
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"
+                  ><i class="fa fa-search"></i
+                ></span>
+              </div>
+            </div>
+            <div class="table-content">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="heading-MNV">Mã nhân viên</th>
+                    <th class="heading-TNV">Họ và tên nhân viên</th>
+                    <th class="heading-Email">Email</th>
+                    <th class="heading-NS">Ngày Sinh</th>
+                    <th class="heading-CV">Chức vụ</th>
+                    <th class="heading-CD"><i class="fa fa-cog"></i></th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyNhanVien"></tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
+    <!-- <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -45,6 +217,8 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <script src="./QLNV.js"></script>
+    <script src="./js/nhanVienModels.js"></script>
+    <script src="./js/validate.js"></script>
+    <script src="./js/QLNV.js"></script>
   </body>
 </html>
