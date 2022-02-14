@@ -38,7 +38,6 @@ function SelectChangeVal() {
 }
 
 function xoaNV(_maNV) {
-  console.log(_maNV);
   var index = timKiemNV(_maNV);
   if (index < 0) {
     return;
@@ -70,7 +69,6 @@ function themNV() {
   }
   var maIsValid = false;
   dsNV.map(function (nv) {
-    console.log(nv);
     if (nv.Ma === maNV) {
       maIsValid = true;
     } else {
@@ -93,7 +91,7 @@ function themNV() {
 }
 
 function suaNV(_maNV) {
-  // clearAllFields();
+  clearAllFields();
   var index = timKiemNV(_maNV);
   if (index < 0) {
     return;
@@ -126,7 +124,6 @@ function renderTable(array) {
     `;
   }
   document.getElementById("tbodyNhanVien").innerHTML = contentHTML;
-  console.log(dsNV);
   luuDataLocal();
 }
 
