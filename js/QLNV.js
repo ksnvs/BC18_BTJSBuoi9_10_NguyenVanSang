@@ -38,11 +38,13 @@ function SelectChangeVal() {
 }
 
 function xoaNV(_maNV) {
+  console.log(_maNV);
   var index = timKiemNV(_maNV);
+  if (index < 0) {
+    return;
+  }
   dsNV.splice(index, 1);
   renderTable(dsNV);
-
-  luuDataLocal();
 }
 
 function themNV() {
@@ -79,9 +81,29 @@ function themNV() {
     alert("Mã nhân viên đã tồn tại");
     return;
   }
-  var NV = new NhanVien(maNV, tenNV, emailNV, ngaySinhNV, chucVuNV);
+  var NV = new NhanVien(
+    maNV.trim(),
+    tenNV.trim(),
+    emailNV.trim(),
+    ngaySinhNV.trim(),
+    chucVuNV.trim()
+  );
   dsNV.push(NV);
   renderTable(dsNV);
+}
+
+function suaNV(_maNV) {
+  // clearAllFields();
+  var index = timKiemNV(_maNV);
+  if (index < 0) {
+    return;
+  }
+  var nv = dsNV[index];
+  document.getElementById("txtMaNV").value = nv.Ma;
+  document.getElementById("txtTenNV").value = nv.Ten;
+  document.getElementById("txtEmailNV").value = nv.Email;
+  document.getElementById("txtNgaySinhNV").value = nv.NgaySinh;
+  document.getElementById("txtChucVuNV").value = nv.ChucVu;
 }
 
 function renderTable(array) {
@@ -96,14 +118,15 @@ function renderTable(array) {
     <td>${nv.NgaySinh}</td>    
     <td>${nv.ChucVu}</td> 
     <td>
-    <button onclick="suaNV(${nv.Ma})" class="btn btn-success">Sửa</button>
+    
+    <button onclick="suaNV(${nv.Ma})" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Sửa</button>
     <button onclick="xoaNV(${nv.Ma})" class="btn btn-danger">Xóa</button>
     </td>
-    </tr>
+    </tr> 
     `;
   }
   document.getElementById("tbodyNhanVien").innerHTML = contentHTML;
-
+  console.log(dsNV);
   luuDataLocal();
 }
 
