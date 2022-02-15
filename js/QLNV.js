@@ -129,7 +129,19 @@ function suaNV(_maNV) {
 // Sửa nhân viên
 
 // Cập nhật nhân viên
-function CapNhatNV() {}
+function CapNhatNV() {
+  var maNV = document.getElementById("txtMaNV").value;
+  var tenNV = document.getElementById("txtTenNV").value;
+  var emailNV = document.getElementById("txtEmailNV").value;
+  var ngaySinhNV = document.getElementById("txtNgaySinhNV").value;
+  var chucVuNV = document.getElementById("txtChucVuNV").value;
+
+  var index = timKiemNV(maNV);
+  var nhanVien = new NhanVien(maNV, tenNV, emailNV, ngaySinhNV, chucVuNV);
+  dsNV[index] = nhanVien;
+  renderTable(dsNV);
+  luuDataLocal();
+}
 // Cập nhật nhân viên
 
 function timKiemNV(_maNV) {
