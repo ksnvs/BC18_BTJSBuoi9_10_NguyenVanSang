@@ -135,7 +135,20 @@ function CapNhatNV() {
   var emailNV = document.getElementById("txtEmailNV").value;
   var ngaySinhNV = document.getElementById("txtNgaySinhNV").value;
   var chucVuNV = document.getElementById("txtChucVuNV").value;
-
+  var _isEmpty =
+    isEmpty("txtTenNV", "spanTenNV") |
+    isEmpty("txtEmailNV", "spanEmailNV") |
+    isEmpty("txtNgaySinhNV", "spanNSNV") |
+    isEmpty("txtChucVuNV", "spanCVNV");
+  if (_isEmpty) {
+    return;
+  }
+  if (
+    !validateEmail("txtEmailNV", "spanEmailNV") |
+    !validateDate("txtNgaySinhNV", "spanNSNV")
+  ) {
+    return;
+  }
   var index = timKiemNV(maNV);
   var nhanVien = new NhanVien(maNV, tenNV, emailNV, ngaySinhNV, chucVuNV);
   dsNV[index] = nhanVien;
