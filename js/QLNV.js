@@ -31,6 +31,9 @@ function clearAllFields() {
   document.getElementById("spanEmailNV").innerText = "";
   document.getElementById("spanNSNV").innerText = "";
   document.getElementById("spanCVNV").innerText = "";
+  document.getElementById("txtMaNV").readOnly = false;
+  document.getElementById("btnThemNV").style.display = "block";
+  document.getElementById("btnCapNhatNV").style.display = "none";
 }
 
 function SelectChangeVal() {
@@ -47,6 +50,7 @@ function xoaNV(_maNV) {
 }
 
 function themNV() {
+  document.getElementById("exampleModalLabel").innerText = `Thêm nhân viên`;
   var maNV = document.getElementById("txtMaNV").value;
   var tenNV = document.getElementById("txtTenNV").value;
   var emailNV = document.getElementById("txtEmailNV").value;
@@ -75,6 +79,7 @@ function themNV() {
       maIsValid = false;
     }
   });
+
   if (maIsValid) {
     alert("Mã nhân viên đã tồn tại");
     return;
@@ -91,7 +96,12 @@ function themNV() {
 }
 
 function suaNV(_maNV) {
-  clearAllFields();
+  document.getElementById(
+    "exampleModalLabel"
+  ).innerText = `Sửa thông tin nhân viên`;
+  document.getElementById("btnThemNV").style.display = "none";
+  document.getElementById("btnCapNhatNV").style.display = "block";
+
   var index = timKiemNV(_maNV);
   if (index < 0) {
     return;
@@ -102,6 +112,7 @@ function suaNV(_maNV) {
   document.getElementById("txtEmailNV").value = nv.Email;
   document.getElementById("txtNgaySinhNV").value = nv.NgaySinh;
   document.getElementById("txtChucVuNV").value = nv.ChucVu;
+  document.getElementById("txtMaNV").readOnly = true;
 }
 
 function renderTable(array) {
@@ -117,8 +128,8 @@ function renderTable(array) {
     <td>${nv.ChucVu}</td> 
     <td>
     
-    <button onclick="suaNV(${nv.Ma})" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Sửa</button>
-    <button onclick="xoaNV(${nv.Ma})" class="btn btn-danger">Xóa</button>
+    <button onclick='suaNV("${nv.Ma}")' class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Sửa</button>
+    <button onclick='xoaNV("${nv.Ma}")' class="btn btn-danger">Xóa</button>
     </td>
     </tr> 
     `;
