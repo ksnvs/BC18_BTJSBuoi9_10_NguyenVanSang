@@ -1,9 +1,13 @@
 var dsNV = [];
+
+//AutoCheck Validate fields
 autoCheck("txtMaNV", "spanMaNV");
 autoCheck("txtTenNV", "spanTenNV");
 autoCheck("txtEmailNV", "spanEmailNV");
 autoCheck("txtNgaySinhNV", "spanNSNV");
 autoCheckSelect("txtChucVuNV", "spanCVNV");
+//AutoCheck Validate fields
+
 // Loading data from local Storage
 var dsNVLocal = JSON.parse(localStorage.getItem("dsNVLocal"));
 if (dsNVLocal !== null) {
@@ -20,6 +24,8 @@ function luuDataLocal() {
   localStorage.setItem("dsNVLocal", dsNVjson);
 }
 // Save local Storage
+
+//Clear all fields
 function clearAllFields() {
   document.getElementById("txtMaNV").value = "";
   document.getElementById("txtTenNV").value = "";
@@ -35,19 +41,12 @@ function clearAllFields() {
   document.getElementById("btnThemNV").style.display = "block";
   document.getElementById("btnCapNhatNV").style.display = "none";
 }
-
+//Clear all fields
 function SelectChangeVal() {
   isEmpty("txtChucVuNV", "spanCVNV");
 }
 
-function xoaNV(_maNV) {
-  var index = timKiemNV(_maNV);
-  if (index < 0) {
-    return;
-  }
-  dsNV.splice(index, 1);
-  renderTable(dsNV);
-}
+// Thêm nhân viên
 
 function themNV() {
   document.getElementById("exampleModalLabel").innerText = `Thêm nhân viên`;
@@ -94,7 +93,20 @@ function themNV() {
   dsNV.push(NV);
   renderTable(dsNV);
 }
+// Thêm nhân viên
 
+// Xóa nhân viên
+function xoaNV(_maNV) {
+  var index = timKiemNV(_maNV);
+  if (index < 0) {
+    return;
+  }
+  dsNV.splice(index, 1);
+  renderTable(dsNV);
+}
+// Xóa nhân viên
+
+// Sửa nhân viên
 function suaNV(_maNV) {
   document.getElementById(
     "exampleModalLabel"
@@ -113,6 +125,19 @@ function suaNV(_maNV) {
   document.getElementById("txtNgaySinhNV").value = nv.NgaySinh;
   document.getElementById("txtChucVuNV").value = nv.ChucVu;
   document.getElementById("txtMaNV").readOnly = true;
+}
+// Sửa nhân viên
+
+// Cập nhật nhân viên
+function CapNhatNV() {}
+// Cập nhật nhân viên
+
+function timKiemNV(_maNV) {
+  for (var index = 0; index < dsNV.length; index++) {
+    if (dsNV[index].Ma == _maNV) {
+      return index;
+    }
+  }
 }
 
 function renderTable(array) {
@@ -136,12 +161,4 @@ function renderTable(array) {
   }
   document.getElementById("tbodyNhanVien").innerHTML = contentHTML;
   luuDataLocal();
-}
-
-function timKiemNV(_maNV) {
-  for (var index = 0; index < dsNV.length; index++) {
-    if (dsNV[index].Ma == _maNV) {
-      return index;
-    }
-  }
 }
